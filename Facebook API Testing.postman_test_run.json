@@ -1,0 +1,351 @@
+{
+	"id": "f3158bd9-35c7-4e55-9f6e-e82bd05db190",
+	"name": "Facebook API Testing",
+	"allTests": [],
+	"timestamp": "2018-03-17T22:18:20.720Z",
+	"collection_id": "890365f7-97b7-461c-93a7-8b0b0b703df9",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "ac125a04-469c-48ac-8151-f444edf8cc35",
+	"data": [],
+	"delay": 0,
+	"count": 1,
+	"collection": {
+		"id": "890365f7-97b7-461c-93a7-8b0b0b703df9",
+		"name": "Facebook API Testing",
+		"description": "",
+		"auth": null,
+		"events": [
+			{
+				"listen": "prerequest",
+				"script": {
+					"id": "ed173527-8fa5-4427-88fb-4229d8de657c",
+					"type": "text/javascript",
+					"exec": [
+						""
+					]
+				}
+			},
+			{
+				"listen": "test",
+				"script": {
+					"id": "af76664e-c84c-4ab2-9ec8-3af14b411ca1",
+					"type": "text/javascript",
+					"exec": [
+						""
+					]
+				}
+			}
+		],
+		"variables": [],
+		"order": [],
+		"folders_order": [
+			"0abead76-c52e-4c3a-99b3-224d21a46079",
+			"42be0ef6-a660-49bb-ad09-7544175c1231"
+		],
+		"owner": "3936696",
+		"permissions": {},
+		"favorite": false,
+		"shared": false,
+		"type": "collection",
+		"depth": 0
+	},
+	"folder": null,
+	"environment": null,
+	"globals": [],
+	"results": [
+		{
+			"name": "Getting Access Token",
+			"id": "1a7fa7a0-4213-4b62-ab86-593bbf5b9fdd",
+			"url": "{{oauth_url}}?client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"Response status must be 200": true,
+				"Response must have a json body": true,
+				"Response must be a token": true
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"398"
+			],
+			"allTests": [
+				{
+					"Response status must be 200": true,
+					"Response must have a json body": true,
+					"Response must be a token": true
+				}
+			],
+			"time": "398",
+			"totalRequestTime": "398",
+			"iterationResults": {}
+		},
+		{
+			"name": "Posting User Comment",
+			"id": "65c01bdc-25a2-481c-9e34-7a4b942b79d6",
+			"url": "{{graph_feed_url}}",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"Response status must be 200": true,
+				"Response must have a json body": true,
+				"Response must be the message ID": true
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be the message ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1067"
+			],
+			"allTests": [
+				{
+					"Response status must be 200": true,
+					"Response must have a json body": true,
+					"Response must be the message ID": true
+				}
+			],
+			"time": "1067",
+			"totalRequestTime": "1067",
+			"iterationResults": {}
+		},
+		{
+			"name": "Posting Duplicated User Comment",
+			"id": "9f422faa-3956-4183-bc8c-bd7b2227c102",
+			"url": "{{graph_feed_url}}",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"Response status must be 400": true,
+				"Response must be an error message": true
+			},
+			"testPassFailCounts": {
+				"Response status must be 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be an error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"254"
+			],
+			"allTests": [
+				{
+					"Response status must be 400": true,
+					"Response must be an error message": true
+				}
+			],
+			"time": "254",
+			"totalRequestTime": "254",
+			"iterationResults": {}
+		},
+		{
+			"name": "Updating User Comment",
+			"id": "11c36e3e-9213-4b20-b955-f7b440d3a700",
+			"url": "{{graph_feed_update_url}}",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"Response status must be 200": true,
+				"Response must have a json body": true,
+				"Response must be a success message": true
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be a success message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1293"
+			],
+			"allTests": [
+				{
+					"Response status must be 200": true,
+					"Response must have a json body": true,
+					"Response must be a success message": true
+				}
+			],
+			"time": "1293",
+			"totalRequestTime": "1293",
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 11,
+	"totalFail": 0,
+	"totalTime": 3012,
+	"lifecycle": "done",
+	"requests": [
+		{
+			"name": "Getting Access Token",
+			"id": "1a7fa7a0-4213-4b62-ab86-593bbf5b9fdd",
+			"url": "{{oauth_url}}?client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials",
+			"time": "2018-03-17T22:18:20.720Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Posting User Comment",
+			"id": "65c01bdc-25a2-481c-9e34-7a4b942b79d6",
+			"url": "{{graph_feed_url}}",
+			"time": "2018-03-17T22:18:20.720Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be the message ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Posting Duplicated User Comment",
+			"id": "9f422faa-3956-4183-bc8c-bd7b2227c102",
+			"url": "{{graph_feed_url}}",
+			"time": "2018-03-17T22:18:20.720Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Response status must be 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be an error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Updating User Comment",
+			"id": "11c36e3e-9213-4b20-b955-f7b440d3a700",
+			"url": "{{graph_feed_update_url}}",
+			"time": "2018-03-17T22:18:20.720Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Response status must be 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must have a json body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response must be a success message": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		}
+	],
+	"synced": false
+}

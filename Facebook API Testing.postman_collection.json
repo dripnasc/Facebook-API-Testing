@@ -1,0 +1,368 @@
+{
+	"info": {
+		"name": "Facebook API Testing",
+		"_postman_id": "890365f7-97b7-461c-93a7-8b0b0b703df9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"description": "",
+			"item": [
+				{
+					"name": "Getting Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f4df67a7-876b-4f76-a157-1d418ad17071",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response status must be 200\", function(){",
+									"   pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response must have a json body\", function () {",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response must be a token\", function () {",
+									"    var schema = {",
+									"     \"type\": \"object\",",
+									"     \"properties\": {",
+									"         \"access_token\": {",
+									"             \"type\": \"string\"",
+									"         },",
+									"         \"token_type\": {",
+									"             \"type\": \"string\"",
+									"         }",
+									"     }",
+									"    };",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"    pm.expect(jsonData.token_type).to.eql(\"bearer\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{oauth_url}}?client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials",
+							"host": [
+								"{{oauth_url}}"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"equals": true
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"equals": true
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"description": "",
+			"item": [
+				{
+					"name": "Posting User Comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c7c48f93-c67a-427c-91ce-45d8e224d961",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response status must be 200\", function(){",
+									"   pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response must have a json body\", function () {",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response must be the message ID\", function () {",
+									"    var schema = {",
+									"     \"type\": \"object\",",
+									"     \"properties\": {",
+									"         \"id\": {",
+									"             \"type\": \"string\"",
+									"         }",
+									"     }",
+									"    };",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"    pm.environment.set(\"post_id\", jsonData.id);",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "02220d5d-03b0-4a10-abb3-f077b8629973",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"post_message\", \"This is a test message \" + new Date().getTime());",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"{{post_message}}\"\n}"
+						},
+						"url": {
+							"raw": "{{graph_feed_url}}",
+							"host": [
+								"{{graph_feed_url}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Posting Duplicated User Comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e97c145f-6088-4ca8-a935-1423beb965e7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response status must be 400\", function(){",
+									"   pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response must be an error message\", function () {",
+									"    var schema = {",
+									"        \"type\": \"object\",",
+									"        \"properties\": {",
+									"            \"error\": {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"message\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"type\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"code\": {",
+									"                        \"type\": \"integer\"",
+									"                    },",
+									"                    \"error_subcode\": {",
+									"                        \"type\": \"integer\"",
+									"                    },",
+									"                    \"is_transient\": {",
+									"                        \"type\": \"boolean\"",
+									"                    },",
+									"                    \"error_user_title\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"error_user_msg\": {",
+									"                        \"type\": \"string\"",
+									"                    },",
+									"                    \"fbtrace_id\": {",
+									"                        \"type\": \"string\"",
+									"                    }",
+									"                }",
+									"            }",
+									"        }",
+									"    };",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"    pm.expect(jsonData.error.message).to.eql(\"Duplicate status message\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "92f35cb3-aebd-45f8-8a8a-af44601b4628",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"{{post_message}}\"\n}"
+						},
+						"url": {
+							"raw": "{{graph_feed_url}}",
+							"host": [
+								"{{graph_feed_url}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Updating User Comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8fb38190-d6af-404b-bce1-16d4c04de27d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response status must be 200\", function(){",
+									"   pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response must have a json body\", function () {",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response must be a success message\", function () {",
+									"    var schema = {",
+									"     \"type\": \"object\",",
+									"     \"properties\": {",
+									"         \"success\": {",
+									"             \"type\": \"boolean\"",
+									"         }",
+									"     }",
+									"    };",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "706aab8a-ff11-4214-bce4-5d922baf1b1a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.environment.set(\"post_message_updated\", \"This is an updated message \" + new Date().getTime());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"{{post_message_updated}}\"\n}"
+						},
+						"url": {
+							"raw": "{{graph_feed_update_url}}",
+							"host": [
+								"{{graph_feed_update_url}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d739ccab-c9f3-430d-a9b5-e9932baf0a1a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4e739c2-c691-4219-8d10-9fd3274372f9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ed173527-8fa5-4427-88fb-4229d8de657c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "af76664e-c84c-4ab2-9ec8-3af14b411ca1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
