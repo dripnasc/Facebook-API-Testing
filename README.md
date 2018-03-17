@@ -8,8 +8,8 @@
 
 
 ##### Files to import collection and environment configurations:
-- [Facebook API Testing.postman_collection.json](Facebook_API_Testing.postman_collection.json)
+- [Facebook API Testing.postman_collection.json](Facebook%20API%20Testing.postman_collection.json)
 - [Facebook.postman_environment.json](Facebook.postman_environment.json)
 
 ##### Test execution results:
-- [Facebook API Testing.postman_test_run.json](Facebook_API_Testing.postman_test_run.json)
+- [Facebook API Testing.postman_test_run.json](Facebook%20API%20Testing.postman_test_run.json)
