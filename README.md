@@ -22,3 +22,5 @@
 ###### Test execution results:
 - [Facebook API Testing.postman_test_run.json](Facebook%20API%20Testing.postman_test_run.json)
 
+###### Test cases document:
+- [Casos de testes - Desafio Sensedia.pdf](Casos%20de%20testes%20-%20Desafio%20Sensedia.pdf)
